@@ -1,4 +1,4 @@
-# co27b42ffa692a8840fe10633
+Checkout the game: https://doryfar.github.io/SnakeGame/
 
 Quick start:
 
