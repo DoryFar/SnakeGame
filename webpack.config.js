@@ -1,4 +1,7 @@
 module.exports = {
+  "build": {
+    "publish": "public"
+  },
   "output": {
     "filename": "[name].pack.js"
   },
