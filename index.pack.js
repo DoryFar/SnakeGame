@@ -76,14 +76,15 @@
 var grid = document.querySelector('.grid');
 var startButton = document.getElementById('start');
 var scoreDisplay = document.getElementById('score');
+var gameOverSign = document.getElementById('gameOver');
 var squares = [];
-var currentSnake = [102, 101, 100];
+var currentSnake = [2, 1, 0];
 var direction = 1;
 var width = 20;
 var appleIndex = 0;
 var score = 0;
-var intervalTime = 600;
-var speed = 0.85;
+var intervalTime = 500;
+var speed = 0.75;
 var timerId = 0;
 
 function createGrid() {
@@ -106,6 +107,7 @@ currentSnake.forEach(function (index) {
 });
 
 function startGame() {
+    gameOverSign.style.display = 'none';
     //remove the snake
     currentSnake.forEach(function (index) {
         return squares[index].classList.remove('snake');
@@ -115,12 +117,12 @@ function startGame() {
     clearInterval(timerId);
     currentSnake = [2, 1, 0];
     score = 0;
-    //re add new score to browser
+    //re-add new score to browser
     scoreDisplay.textContent = score;
     direction = 1;
     intervalTime = 1000;
     generateApple();
-    //readd the class of snake to our new currentSnake
+    //read the class of snake to our new currentSnake
     currentSnake.forEach(function (index) {
         return squares[index].classList.add('snake');
     });
@@ -132,7 +134,11 @@ function move() {
     currentSnake[0] % width === width - 1 && direction === 1 || //if snake has hit right wall
     currentSnake[0] % width === 0 && direction === -1 || //if snake has hit left wall
     currentSnake[0] - width < 0 && direction === -width || //if snake has hit top
-    squares[currentSnake[0] + direction].classList.contains('snake')) return clearInterval(timerId);
+    squares[currentSnake[0] + direction].classList.contains('snake')) {
+        clearInterval(timerId);
+        gameOverSign.style.display = 'block';
+        return;
+    }
 
     //remove last element from our currentSnake array
     var tail = currentSnake.pop();
@@ -160,9 +166,7 @@ function move() {
         scoreDisplay.textContent = score;
         //speed up our snake
         clearInterval(timerId);
-        console.log(intervalTime);
         intervalTime = intervalTime * speed;
-        console.log(intervalTime);
         timerId = setInterval(move, intervalTime);
     }
 
