@@ -2,7 +2,7 @@ const grid = document.querySelector('.grid')
 const startButton = document.getElementById('start')
 const scoreDisplay = document.getElementById('score')
 let squares = []
-let currentSnake = [212,211,210]
+let currentSnake = [2,1,0]
 let direction = 1
 const width = 20
 let appleIndex = 0
@@ -34,7 +34,7 @@ function startGame() {
     //remove the apple
     squares[appleIndex].classList.remove('apple')
     clearInterval(timerId)
-    currentSnake = [212,211,210]
+    currentSnake = [2,1,0]
     score = 0
     //re add new score to browser
     scoreDisplay.textContent = score
